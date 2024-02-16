@@ -28,47 +28,47 @@
 @endphp
 
 <{!! $tag !!}
-    @if ($url)
-        {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab()) }}
-    @endif
-    {{
-        $getExtraAttributeBag()
-            ->class([
-                'fi-wi-stats-overview-stat relative rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10',
-            ])
-    }}
+@if ($url)
+    {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab()) }}
+@endif
+{{
+    $getExtraAttributeBag()
+        ->class([
+            'fi-wi-stats-overview-stat relative rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10',
+        ])
+}}
 >
-    <div class="grid gap-y-2">
-        <div class="flex items-center gap-x-2">
-            @if ($icon = $getIcon())
-                <x-filament::icon
+<div class="grid gap-y-2">
+    <div class="flex items-center gap-x-2">
+        @if ($icon = $getIcon())
+            <x-filament::icon
                     :icon="$icon"
                     class="fi-wi-stats-overview-stat-icon h-5 w-5 text-gray-400 dark:text-gray-500"
-                />
-            @endif
+            />
+        @endif
 
-            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
+        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ $getLabel() }}
             </span>
-        </div>
+    </div>
 
-        <div
+    <div
             class="text-3xl font-semibold tracking-tight text-gray-950 dark:text-white"
-        >
-            {{ $getValue() }}
-        </div>
+    >
+        {{ $getValue() }}
+    </div>
 
-        @if ($description = $getDescription())
-            <div class="flex items-center gap-x-1">
-                @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::Before, 'before']))
-                    <x-filament::icon
+    @if ($description = $getDescription())
+        <div class="flex items-center gap-x-1">
+            @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::Before, 'before']))
+                <x-filament::icon
                         :icon="$descriptionIcon"
                         :class="$descriptionIconClasses"
                         :style="$descriptionIconStyles"
-                    />
-                @endif
+                />
+            @endif
 
-                <span
+            <span
                     @class([
                         'fi-wi-stats-overview-stat-description text-sm',
                         match ($descriptionColor) {
@@ -87,21 +87,21 @@
                     {{ $description }}
                 </span>
 
-                @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::After, 'after']))
-                    <x-filament::icon
+            @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::After, 'after']))
+                <x-filament::icon
                         :icon="$descriptionIcon"
                         :class="$descriptionIconClasses"
                         :style="$descriptionIconStyles"
-                    />
-                @endif
-            </div>
-        @endif
-    </div>
+                />
+            @endif
+        </div>
+    @endif
+</div>
 
-    @if ($chart = $getChart())
-        {{-- An empty function to initialize the Alpine component with until it's loaded with `ax-load`. This removes the need for `x-ignore`, allowing the chart to be updated via Livewire polling. --}}
-        <div x-data="{ statsOverviewStatChart: function () {} }">
-            <div
+@if ($chart = $getChart())
+    {{-- An empty function to initialize the Alpine component with until it's loaded with `ax-load`. This removes the need for `x-ignore`, allowing the chart to be updated via Livewire polling. --}}
+    <div x-data="{ statsOverviewStatChart: function () {} }">
+        <div
                 @if (FilamentView::hasSpaMode())
                     ax-load="visible"
                 @else
@@ -127,10 +127,10 @@
                         alias: 'widgets::stats-overview-widget.stat.chart',
                     ) => $chartColor !== 'gray',
                 ])
-            >
-                <canvas x-ref="canvas" class="h-6"></canvas>
+        >
+            <canvas x-ref="canvas" class="h-6"></canvas>
 
-                <span
+            <span
                     x-ref="backgroundColorElement"
                     @class([
                         match ($chartColor) {
@@ -140,7 +140,7 @@
                     ])
                 ></span>
 
-                <span
+            <span
                     x-ref="borderColorElement"
                     @class([
                         match ($chartColor) {
@@ -149,7 +149,7 @@
                         },
                     ])
                 ></span>
-            </div>
         </div>
-    @endif
+    </div>
+@endif
 </{!! $tag !!}>

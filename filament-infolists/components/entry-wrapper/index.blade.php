@@ -60,17 +60,17 @@
     @endif
 
     <div
-        @class([
-            'grid gap-y-2',
-            'sm:grid-cols-3 sm:items-start sm:gap-x-4' => $hasInlineLabel,
-        ])
+            @class([
+                'grid gap-y-1.5',
+                'sm:grid-cols-3 sm:items-start sm:gap-x-4' => $hasInlineLabel,
+            ])
     >
         @if (($label && (! $labelSrOnly)) || $labelPrefix || $labelSuffix || filled($hint) || $hintIcon)
             <div class="flex items-center justify-between gap-x-3">
                 @if ($label && (! $labelSrOnly))
                     <x-filament-infolists::entry-wrapper.label
-                        :prefix="$labelPrefix"
-                        :suffix="$labelSuffix"
+                            :prefix="$labelPrefix"
+                            :suffix="$labelSuffix"
                     >
                         {{ $label }}
                     </x-filament-infolists::entry-wrapper.label>
@@ -82,10 +82,10 @@
 
                 @if (filled($hint) || $hintIcon || count($hintActions))
                     <x-filament-infolists::entry-wrapper.hint
-                        :actions="$hintActions"
-                        :color="$hintColor"
-                        :icon="$hintIcon"
-                        :tooltip="$hintIconTooltip"
+                            :actions="$hintActions"
+                            :color="$hintColor"
+                            :icon="$hintIcon"
+                            :tooltip="$hintIconTooltip"
                     >
                         {{ $hint }}
                     </x-filament-infolists::entry-wrapper.hint>
@@ -94,35 +94,35 @@
         @endif
 
         <div
-            @class([
-                'grid gap-y-2',
-                'sm:col-span-2' => $hasInlineLabel,
-            ])
+                @class([
+                    'grid gap-y-2',
+                    'sm:col-span-2' => $hasInlineLabel,
+                ])
         >
             <dd
-                @if (filled($tooltip))
-                    x-data="{}"
+                    @if (filled($tooltip))
+                        x-data="{}"
                     x-tooltip="{
                         content: @js($tooltip),
                         theme: $store.theme,
                     }"
-                @endif
-                @class([
-                    match ($alignment) {
-                        Alignment::Start => 'text-start',
-                        Alignment::Center => 'text-center',
-                        Alignment::End => 'text-end',
-                        Alignment::Justify, Alignment::Between => 'text-justify',
-                        Alignment::Left => 'text-left',
-                        Alignment::Right => 'text-right',
-                        default => $alignment,
-                    },
-                ])
+                    @endif
+                    @class([
+                        match ($alignment) {
+                            Alignment::Start => 'text-start',
+                            Alignment::Center => 'text-center',
+                            Alignment::End => 'text-end',
+                            Alignment::Justify, Alignment::Between => 'text-justify',
+                            Alignment::Left => 'text-left',
+                            Alignment::Right => 'text-right',
+                            default => $alignment,
+                        },
+                    ])
             >
                 @if ($url)
                     <a
-                        {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab) }}
-                        class="block"
+                            {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab) }}
+                            class="block"
                     >
                         {{ $slot }}
                     </a>
@@ -132,11 +132,11 @@
                     @endphp
 
                     <button
-                        type="button"
-                        wire:click="{{ $wireClickAction }}"
-                        wire:loading.attr="disabled"
-                        wire:target="{{ $wireClickAction }}"
-                        class="block"
+                            type="button"
+                            wire:click="{{ $wireClickAction }}"
+                            wire:loading.attr="disabled"
+                            wire:target="{{ $wireClickAction }}"
+                            class="block"
                     >
                         {{ $slot }}
                     </button>

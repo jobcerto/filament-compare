@@ -12,7 +12,6 @@
                     ->merge($getExtraAttributes(), escape: false)
                     ->class([
                         'fi-in-repeatable',
-                        'fi-contained' => $isContained,
                     ])
             }}
     >
@@ -28,15 +27,16 @@
                         class="gap-4"
                 >
                     @foreach ($childComponentContainers as $container)
-
                         <li
                                 @class([
-                                    'fi-in-repeatable-item block',
-                                    'border-b border-blue-200 pb-4' => ! $loop->last,
-                                    'fi-fieldset rounded-xl border border-blue-200 p-6 dark:border-white/10' => $isContained,
+                                    'fi-in-repeatable-item block rounded-xl p-4 shadow-sm ring-1 ring-gray-950/5 dark:bg-white/5 dark:ring-white/10',
+                                    ...$getRowColors($container),
                                 ])
                         >
-                            {{ $container }}
+
+                            <div>
+                                {{ $container }}
+                            </div>
                         </li>
                     @endforeach
                 </x-filament::grid>

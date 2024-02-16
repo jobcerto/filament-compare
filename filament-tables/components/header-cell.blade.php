@@ -18,37 +18,38 @@
 @endphp
 
 <th
-    {{ $attributes->class(['fi-ta-header-cell px-3 py-3.5 sm:first-of-type:ps-6 sm:last-of-type:pe-6']) }}
+        {{ $attributes->class(['fi-ta-header-cell px-3 py-3.5 sm:first-of-type:ps-6 sm:last-of-type:pe-6']) }}
 >
     <{{ $sortable ? 'button' : 'span' }}
         @if ($sortable)
-            aria-label="{{ __('filament-tables::table.sorting.fields.column.label') }} {{ $sortDirection === 'asc' ? __('filament-tables::table.sorting.fields.direction.options.desc') : __('filament-tables::table.sorting.fields.direction.options.asc') }}"
-            type="button"
-            wire:click="sortTable('{{ $name }}')"
-        @endif
-        @class([
-            'group flex w-full items-center gap-x-1',
-            'whitespace-nowrap' => ! $wrap,
-            'whitespace-normal' => $wrap,
-            match ($alignment) {
-                Alignment::Start => 'justify-start',
-                Alignment::Center => 'justify-center',
-                Alignment::End => 'justify-end',
-                Alignment::Left => 'justify-start rtl:flex-row-reverse',
-                Alignment::Right => 'justify-end rtl:flex-row-reverse',
-                Alignment::Justify, Alignment::Between => 'justify-between',
-                default => $alignment,
-            },
-        ])
+        aria-label
+    ="{{ __('filament-tables::table.sorting.fields.column.label') }} {{ $sortDirection === 'asc' ? __('filament-tables::table.sorting.fields.direction.options.desc') : __('filament-tables::table.sorting.fields.direction.options.asc') }}"
+    type="button"
+    wire:click="sortTable('{{ $name }}')"
+    @endif
+    @class([
+        'group flex w-full items-center gap-x-1',
+        'whitespace-nowrap' => ! $wrap,
+        'whitespace-normal' => $wrap,
+        match ($alignment) {
+            Alignment::Start => 'justify-start',
+            Alignment::Center => 'justify-center',
+            Alignment::End => 'justify-end',
+            Alignment::Left => 'justify-start rtl:flex-row-reverse',
+            Alignment::Right => 'justify-end rtl:flex-row-reverse',
+            Alignment::Justify, Alignment::Between => 'justify-between',
+            default => $alignment,
+        },
+    ])
     >
-        <span
-            class="fi-ta-header-cell-label text-sm font-semibold text-gray-950 dark:text-white"
-        >
+    <span
+            class="fi-ta-header-cell-label text-sm font-semibold text-gray-600 dark:text-white"
+    >
             {{ $slot }}
         </span>
 
-        @if ($sortable)
-            <x-filament::icon
+    @if ($sortable)
+        <x-filament::icon
                 :alias="$activelySorted && $sortDirection === 'asc' ? 'tables::header-cell.sort-asc-button' : 'tables::header-cell.sort-desc-button'"
                 :icon="$activelySorted && $sortDirection === 'asc' ? 'heroicon-m-chevron-up' : 'heroicon-m-chevron-down'"
                 @class([
@@ -56,7 +57,7 @@
                     'text-gray-950 dark:text-white' => $activelySorted,
                     'text-gray-400 dark:text-gray-500 group-hover:text-gray-500 group-focus-visible:text-gray-500 dark:group-hover:text-gray-400 dark:group-focus-visible:text-gray-400' => ! $activelySorted,
                 ])
-            />
-        @endif
-    </{{ $sortable ? 'button' : 'span' }}>
+        />
+    @endif
+</{{ $sortable ? 'button' : 'span' }}>
 </th>
